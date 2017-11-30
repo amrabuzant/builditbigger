@@ -1,0 +1,58 @@
+apply plugin: 'com.android.application'
+
+android {
+    flavorDimensions "default"
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
+    defaultConfig {
+        applicationId "com.amr.builditbigger"
+        minSdkVersion 20
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    productFlavors{
+        free{
+            applicationId "com.amr.builditbigger.free"
+
+        }
+        paid{
+            applicationId "com.amr.builditbigger.paid"
+        }
+    }
+
+
+
+
+
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    compile project(':jokeactivity')
+    compile 'com.android.support:appcompat-v7:26.+'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    freeCompile'com.google.android.gms:play-services-ads:9.8.0'
+    compile 'com.google.code.findbugs:jsr305:2.0.1'
+    testCompile 'junit:junit:4.12'
+    compile project(path: ':backend', configuration: 'android-endpoints')
+    compile 'com.google.api-client:google-api-client:1.23.0'
+    compile 'com.google.http-client:google-http-client-android:1.23.0'
+
+    androidTestCompile('com.android.support.test:runner:0.4', {
+        //Solve conflict with dependency "versions for app (24.1.1) and test app (23.0.1) differ"
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+}
